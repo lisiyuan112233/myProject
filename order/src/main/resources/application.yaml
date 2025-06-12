@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: order-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.200.130:3306/gulimall_oms
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+logging:
+  level:
+    com.sia.order: debug
+  pattern:
+    dateformat: yyyy年MM月dd日 HH:mm:ss

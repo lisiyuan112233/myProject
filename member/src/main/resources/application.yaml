@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: member-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+server:
+  port: 8085
+db:
+  name: gulimall_ums
+model:
+  name: member
