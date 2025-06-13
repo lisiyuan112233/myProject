@@ -1,12 +1,13 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.40.250.167:3306/gulimall_sms
-    username: root
-    password: 123456
-    type: com.zaxxer.hikari.HikariDataSource
-logging:
-  level:
-    com.sia.mp: debug
-  pattern:
-    dateformat: yyyy年MM月dd日 HH:mm:ss
+  application:
+    name: coupon-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+server:
+  port: 8086
+db:
+  name: gulimall_sms
+model:
+  name: coupon
