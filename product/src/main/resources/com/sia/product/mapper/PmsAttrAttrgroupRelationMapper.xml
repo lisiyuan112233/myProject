@@ -1,17 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sia.product.mapper.PmsAttrAttrgroupRelationMapper">
-
-    <resultMap id="BaseResultMap" type="com.sia.product.domain.PmsAttrAttrgroupRelation">
-            <id property="id" column="id" />
-            <result property="attrId" column="attr_id" />
-            <result property="attrGroupId" column="attr_group_id" />
-            <result property="attrSort" column="attr_sort" />
+    
+    <resultMap type="PmsAttrAttrgroupRelation" id="PmsAttrAttrgroupRelationResult">
+        <result property="id"    column="id"    />
+        <result property="attrId"    column="attr_id"    />
+        <result property="attrGroupId"    column="attr_group_id"    />
+        <result property="attrSort"    column="attr_sort"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
     </resultMap>
 
-    <sql id="Base_Column_List">
-        id,attr_id,attr_group_id,attr_sort
+    <sql id="selectPmsAttrAttrgroupRelationVo">
+        select id, attr_id, attr_group_id, attr_sort, create_by, create_time, update_by, update_time, remark from pms_attr_attrgroup_relation
     </sql>
+
+    <select id="selectPmsAttrAttrgroupRelationList" parameterType="PmsAttrAttrgroupRelation" resultMap="PmsAttrAttrgroupRelationResult">
+        <include refid="selectPmsAttrAttrgroupRelationVo"/>
+        <where>  
+            <if test="attrId != null "> and attr_id = #{attrId}</if>
+            <if test="attrGroupId != null "> and attr_group_id = #{attrGroupId}</if>
+            <if test="attrSort != null "> and attr_sort = #{attrSort}</if>
+            <if test="createBy != null "> and create_by = #{createBy}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateBy != null "> and update_by = #{updateBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+        </where>
+    </select>
+    
+    <select id="selectPmsAttrAttrgroupRelationById" parameterType="Long" resultMap="PmsAttrAttrgroupRelationResult">
+        <include refid="selectPmsAttrAttrgroupRelationVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPmsAttrAttrgroupRelation" parameterType="PmsAttrAttrgroupRelation" useGeneratedKeys="true" keyProperty="id">
+        insert into pms_attr_attrgroup_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">attr_id,</if>
+            <if test="attrGroupId != null">attr_group_id,</if>
+            <if test="attrSort != null">attr_sort,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">#{attrId},</if>
+            <if test="attrGroupId != null">#{attrGroupId},</if>
+            <if test="attrSort != null">#{attrSort},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePmsAttrAttrgroupRelation" parameterType="PmsAttrAttrgroupRelation">
+        update pms_attr_attrgroup_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="attrId != null">attr_id = #{attrId},</if>
+            <if test="attrGroupId != null">attr_group_id = #{attrGroupId},</if>
+            <if test="attrSort != null">attr_sort = #{attrSort},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePmsAttrAttrgroupRelationById" parameterType="Long">
+        delete from pms_attr_attrgroup_relation where id = #{id}
+    </delete>
+
+    <delete id="deletePmsAttrAttrgroupRelationByIds" parameterType="String">
+        delete from pms_attr_attrgroup_relation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

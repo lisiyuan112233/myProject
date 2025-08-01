@@ -11,3 +11,7 @@ db:
   name: gulimall_wms
 model:
   name: ware
+mybatis-plus:
+  type-aliases-package: com.sia.ware.domain
+  configuration:
+    map-underscore-to-camel-case: true

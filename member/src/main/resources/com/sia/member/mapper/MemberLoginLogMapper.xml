@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sia.member.mapper.MemberLoginLogMapper">
+    
+    <resultMap type="MemberLoginLog" id="MemberLoginLogResult">
+        <result property="id"    column="id"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="ip"    column="ip"    />
+        <result property="city"    column="city"    />
+        <result property="loginType"    column="login_type"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectMemberLoginLogVo">
+        select id, member_id, ip, city, login_type, create_by, create_time, update_by, update_time, remark from ums_member_login_log
+    </sql>
+
+    <select id="selectMemberLoginLogList" parameterType="MemberLoginLog" resultMap="MemberLoginLogResult">
+        <include refid="selectMemberLoginLogVo"/>
+        <where>  
+            <if test="memberId != null "> and member_id = #{memberId}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="loginType != null "> and login_type = #{loginType}</if>
+        </where>
+    </select>
+    
+    <select id="selectMemberLoginLogById" parameterType="Long" resultMap="MemberLoginLogResult">
+        <include refid="selectMemberLoginLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertMemberLoginLog" parameterType="MemberLoginLog" useGeneratedKeys="true" keyProperty="id">
+        insert into ums_member_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">member_id,</if>
+            <if test="ip != null">ip,</if>
+            <if test="city != null">city,</if>
+            <if test="loginType != null">login_type,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">#{memberId},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="city != null">#{city},</if>
+            <if test="loginType != null">#{loginType},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMemberLoginLog" parameterType="MemberLoginLog">
+        update ums_member_login_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="memberId != null">member_id = #{memberId},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="loginType != null">login_type = #{loginType},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMemberLoginLogById" parameterType="Long">
+        delete from ums_member_login_log where id = #{id}
+    </delete>
+
+    <delete id="deleteMemberLoginLogByIds" parameterType="String">
+        delete from ums_member_login_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

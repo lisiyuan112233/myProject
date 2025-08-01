@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有路径
+            allowed-origin-patterns: "*"  # 允许所有域名进行跨域调用
+            allowed-methods: "*"  # 允许任何方法（POST、GET等）
+            allowed-headers: "*"  # 允许任何请求头
+            allow-credentials: true  # 允许携带凭证（如Cookie）
+            max-age: 3600  # 预检请求的缓存时间（秒）
+      routes:
+        - id: order-server
+          uri: lb://order-server
+          predicates:
+            - Path=/order/**
+        - id: coupon-server
+          uri: lb://coupon-server
+          predicates:
+            - Path=/coupon/**
+        - id: member-server
+          uri: lb://member-server
+          predicates:
+            - Path=/member/**
+        - id: product-server
+          uri: lb://product-server
+          predicates:
+            - Path=/product/**
+        - id: ware-server
+          uri: lb://ware-server
+          predicates:
+            - Path=/ware/**
+server:
+  port: 8070
+db:
+  name: gulimall_oms
+model:
+  name: gateway
+  level: debug

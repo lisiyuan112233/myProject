@@ -9,7 +9,7 @@
     </parent>
     <artifactId>common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>common</name>
     <description>common</description>
     <properties>
@@ -24,6 +24,11 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>3.5.12</version> <!-- 与主版本保持一致 -->
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

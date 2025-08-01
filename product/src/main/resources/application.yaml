@@ -11,3 +11,8 @@ db:
   name: gulimall_pms
 model:
   name: product
+mybatis-plus:
+  type-aliases-package: com.sia.product.domain
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

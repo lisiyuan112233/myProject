@@ -1,0 +1,13 @@
+package com.sia.product.utils;
+
+import java.util.concurrent.TimeUnit;
+
+public class UserContextUtil<T> {
+    private  final ThreadLocal<T> tl = new ThreadLocal<>();
+    public  void saveUser(T user){
+        tl.set(user);
+    }
+    public T getUser(){
+        return tl.get();
+    }
+}

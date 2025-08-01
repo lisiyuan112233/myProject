@@ -11,3 +11,7 @@ db:
   name: gulimall_sms
 model:
   name: coupon
+mybatis-plus:
+  type-aliases-package: com.sia.coupon.domain
+  configuration:
+    map-underscore-to-camel-case: true

@@ -1,63 +1,34 @@
 package com.sia.product.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.sia.product.domain.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * spu信息介绍
- * @TableName pms_spu_info_desc
+ * spu信息介绍对象 pms_spu_info_desc
+ *
+ * @author lsy
+ * @date 2025-07-31
  */
-@TableName(value ="pms_spu_info_desc")
+@TableName(resultMap = "com.sia.product.mapper.PmsSpuInfoDescMapper.PmsSpuInfoDescResult")
 @Data
-public class PmsSpuInfoDesc {
-    /**
-     * 商品id
-     */
-    @TableId
+@EqualsAndHashCode(callSuper = true)
+public class PmsSpuInfoDesc extends BaseEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    /** 商品id */
+    @TableId(value = "spu_id",type = IdType.ASSIGN_ID)
     private Long spuId;
 
-    /**
-     * 商品介绍
-     */
+    /** 商品介绍 */
     private String decript;
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        PmsSpuInfoDesc other = (PmsSpuInfoDesc) that;
-        return (this.getSpuId() == null ? other.getSpuId() == null : this.getSpuId().equals(other.getSpuId()))
-            && (this.getDecript() == null ? other.getDecript() == null : this.getDecript().equals(other.getDecript()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getSpuId() == null) ? 0 : getSpuId().hashCode());
-        result = prime * result + ((getDecript() == null) ? 0 : getDecript().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", spuId=").append(spuId);
-        sb.append(", decript=").append(decript);
-        sb.append("]");
-        return sb.toString();
-    }
 }
+
+

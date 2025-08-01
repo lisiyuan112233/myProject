@@ -12,3 +12,7 @@ db:
 model:
   name: order
   level: info
+mybatis-plus:
+  type-aliases-package: com.sia.order.domain
+  configuration:
+    map-underscore-to-camel-case: true

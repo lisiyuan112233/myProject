@@ -5,6 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient("member-server")
 public interface memberClient {
-    @GetMapping("/hello")
+    @GetMapping("/member/hello")
     String getHello();
 }
